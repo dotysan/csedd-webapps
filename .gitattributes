@@ -1,0 +1,10 @@
+# TODO:
+#  - `git lfs install` to update hooks in .git/
+#  - `git lfs track` after updating this file
+#  - `git lfs ls-files` to see what's stored as binary
+
+# macros
+[attr]lfs filter=lfs diff=lfs merge=lfs -text
+
+# images
+*.png lfs
