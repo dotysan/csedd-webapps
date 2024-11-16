@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+    <title>BEAD Speed Test</title>  
+<link rel="stylesheet" href="css/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<script src="js/script.js" defer></script>
+<script src="ndt7-js/src/ndt7.min.js" defer></script>
+</head>
+
+<body>
+<div class="header">
+  <h1 style="margin-bottom:0px; font-weight: 300; text-shadow: #2F1F2D 1px 0 5px; text-transform: uppercase;">BEAD Speed Tests</h1>
+</div>
+
+<div id="mobileAlert" >
+<p>Are you using a mobile device? If so, please open this page on a laptop or desktop computer to continue.</p>
+</div>
+
+<div id="addressConfirmation" class="container">
+<p style="width:110px;margin:auto;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Seal_of_Tuolumne_County%2C_California.png/240px-Seal_of_Tuolumne_County%2C_California.png" style="display:block;width:110px;height:110px;"/></p>
+<h1>Welcome to our speed test challenge site</h1>
+<p id="intro" class="intro">Successfully proving or disproving service can have substantial impacts on the amount of federal infrastructure funding that Tuolumne County recieves from the Broadband Equity Access and Deployment Program (BEAD). The proccess is a little complicated but we'll walk you through it.</p>
+<p class="intro"> If you subscribe to satelite internet (Starlink, etc.) or an ISP that serves your location with unlicesned wireless technology (Conifer Communications, etc.), the BEAD program considers your location to be  &ldquo;unserved&rdquo; and there is no need to test your service. You are welcome to use this tool but we cannot contest your service on your behalf.</p>
+<p class="intro"> Are you are at the service location that you want to test? If so, let's check if internet providers claim to serve you.</p>   
+<br>  
+<button id="goSearchBtn" style="padding:10px;">I'm ready!</button>
+</div>
+<div id="goSearch" class="container">
+<div id="searchBox">
+<h2 aria-level="2">Search for your address</h2>
+
+<p><em>1. Start typing your address in the search box without commas or periods. <br>
+2. When your address appears in the list below, click to select it.<br>
+If your address is not in the list, we will not be able to test your service. This is becuase funding is limited to exact matches of  addresses that are in the FCC database. If your address is missing information such as "North," "West," etc., select the closest match and continue on.</em></p>
+</div>
+
+<div>
+	<input type="text" id="addressInput" placeholder="Enter address" aria-label="Enter address">
+</div>
+<div id="suggestions">
+	<br>
+</div>
+</div>
+<div id="speedTestConsent">
+<div class="container">
+<h2>Should you take the speed test?</h2>
+<div id="message"></div><br>
+<div id="message2"></div>
+<div id="consentMessage">
+<p>The BEAD program requires that we collect specific information in order to challenge the service that an ISP claims to offer at your address, including:</p>
+<ul >
+<li>Upload and download speeds</li>
+<li>Public IP address (the address of your network router)</li>
+<li>Details about your current service subscription</li>
+<li>Name and address</li>
+</ul>
+<p>This information will be shared with the State of California, it's sub-contractors, service providers and <a href="https://www.measurementlab.net/about/">M-Lab</a>, the creater of the speed test software. The information may also be used for research. If you choose not to consent, we cannot test your service. If you agree to participate, we will ask for your contact information (email, etc.) so that we can communicate with you. This information will not be shared and will be kept private.</p> 
+<p>Click the button below to confirm you understand and consent to sharing this information.</p>
+<br>
+<button id="dataPolicyConsent" style="padding:10px;">I consent</button>
+</div>
+</div>
+</div>
+	<br>
+
+
+<div id="speedTestRun">
+<div class="container">
+<h2> Great! Before you get started, let&#x2019s check your setup</h2>
+<div id="selectContainer">
+
+<select id="device" name="device">
+  <option value="Blank"></option>
+  <option value="Mobile">Cell phone</option>
+  <option value="Laptop">Laptop</option>
+  <option value="Desktop">Desktop</option>
+</select>
+<label for="device">What kind of device are you using?</label>
+<br>
+
+<select id="VPN" name="VPN">
+  <option value="Blank"></option>
+  <option value="Yes">Yes</option>
+  <option value="No">No</option>
+</select> <span id="VPNalert"></span>
+<label for="VPN">Are you using a VPN?</label>
+<br>
+
+<select id="wifi" name="wifi">
+  <option value="Blank"></option>
+  <option value="WiFi">WiFi</option>
+  <option value="Hardwired">Hardwired</option>
+</select>
+<label for="wifi">What kind of network are you using?</label>
+<br><br>
+<p id="selectMessage" class="intro alert"></p>
+<br>
+
+<div id="setupConfirmation"></div>
+
+</div>
+</div>
+</div>
+<div id="runSpeedTest">
+<div class="container" style="padding-bottom:100px">
+<h2>Running your speed test!</h2>
+    <br>
+    <p id="server"></p>
+    <p id="ipDisplay"></p>
+    <p id="server"></p>
+    <p id="download" class="testResults"></p>
+    <p id="upload"class="testResults"></p>
+    <p id="timestamp"></p>
+    <br>
+    <p id="resultMessage" class="intro"></p>
+</div>
+</div>
+<div class="footer">
+  Have questions? Please email <a href="mailto:ldegroot@co.tuolumne.ca.us?subject
+=BEAD speed test site" target="_blank">Len De Groot</a>. &nbsp;
+Produced by the County of Tuolumne using <a href="https://www.measurementlab.net/about/">M-Lab's</a> speed test software.
+</div>
+
+</body>
+</html>
