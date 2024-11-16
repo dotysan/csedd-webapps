@@ -59,4 +59,5 @@ clean:
 		echo "ERROR: venv $(venv) is not a valid directory or contains slashes. Aborting."; \
 		exit 1; \
 	fi >&2
-	rm --force --recursive $(venv)* .pip .npm
+	rm --force --recursive $(venv)* .pip .npm node_modules
+
