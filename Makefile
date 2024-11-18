@@ -10,12 +10,23 @@ export PIP_CACHE_DIR
 NPM_CONFIG_CACHE:= $(CURDIR)/.npm
 export NPM_CONFIG_CACHE
 
+export CREATE_CLOUDFLARE_TELEMETRY_DISABLED=1
+# or npm create cloudflare telemetry disable
+
 define vrun
 	@source $(vb)/activate && $(1)
 endef
 
-#$(vb)/pnpm: $(vb)/npm
-#	$(call vrun,npm install --global pnpm)
+api:= api
+$(api)/wrangler.toml: $(vb)/pnpm
+# unlock keyring before create cloudflare so the spinner doesn't screw up the password prompt
+	@signingkey=$$(git config user.signingkey); \
+	if [[ "$$signingkey" ]]; then \
+		gpg --sign --local-user $$signingkey </dev/null >/dev/null; fi
+	$(call vrun,pnpm create cloudflare $(api) --type=openapi --no-deploy)
+
+$(vb)/pnpm: $(vb)/npm
+	$(call vrun,npm install --global pnpm)
 
 $(vb)/npm: $(vb)/nodeenv
 	$(call vrun,nodeenv --python-virtualenv --node=lts && \
