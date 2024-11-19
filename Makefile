@@ -14,15 +14,16 @@ export CREATE_CLOUDFLARE_TELEMETRY_DISABLED=1
 # or npm create cloudflare telemetry disable
 
 define vrun
-	@source $(vb)/activate && $(1)
+	source $(vb)/activate && $(1)
 endef
 
+app:= svelte-app
+$(app)/wrangler.toml: $(vb)/pnpm unlock-keyring
+#	$(call vrun,pnpm create cloudflare $(app) --framework=svelte --no-deploy -- --template=minimal --types=ts --no-add-ons --no-install)
+	$(call vrun,pnpm create cloudflare $(app) --framework=svelte --no-deploy -- --template=demo --types=ts --no-add-ons --no-install)
+
 api:= api
-$(api)/wrangler.toml: $(vb)/pnpm
-# unlock keyring before create cloudflare so the spinner doesn't screw up the password prompt
-	@signingkey=$$(git config user.signingkey); \
-	if [[ "$$signingkey" ]]; then \
-		gpg --sign --local-user $$signingkey </dev/null >/dev/null; fi
+$(api)/wrangler.toml: $(vb)/pnpm unlock-keyring
 	$(call vrun,pnpm create cloudflare $(api) --type=openapi --no-deploy)
 
 $(vb)/pnpm: $(vb)/npm
@@ -63,6 +64,13 @@ NDT7_SRC:= tcspeedtest.com/ndt7-js/src/ndt7.js \
 tcst-ndt7-src: $(NDT7_SRC)
 tcspeedtest.com/ndt7-js/src/%.js:
 	wget -m https://tcspeedtest.com/ndt7-js/src/$(@F)
+
+.PHONY: unlock-keyring
+unlock-keyring:
+# unlock keyring before create cloudflare so the spinner doesn't screw up the password prompt
+	@signingkey=$$(git config user.signingkey); \
+	if [[ "$$signingkey" ]]; then \
+		gpg --sign --local-user $$signingkey </dev/null >/dev/null; fi
 
 .PHONY: clean
 clean:
