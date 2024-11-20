@@ -25,7 +25,7 @@ it to your .env file.
 # Cloudflare Wrangler
 # https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
 
-CLOUDFLARE_ACCOUNT_ID='''
+CLOUDFLARE_ACCOUNT_ID=''
 
 CLOUDFLARE_API_TOKEN=''
 
