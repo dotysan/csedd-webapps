@@ -17,6 +17,10 @@ define vrun
 	source $(vb)/activate && $(1)
 endef
 
+# default target
+$(vb)/pnpm: $(vb)/npm
+	$(call vrun,npm install --global pnpm)
+
 app:= svelte-app
 $(app)/wrangler.toml: $(vb)/pnpm unlock-keyring
 #	$(call vrun,pnpm create cloudflare $(app) --framework=svelte --no-deploy -- --template=minimal --types=ts --no-add-ons --no-install)
@@ -25,9 +29,6 @@ $(app)/wrangler.toml: $(vb)/pnpm unlock-keyring
 api:= api
 $(api)/wrangler.toml: $(vb)/pnpm unlock-keyring
 	$(call vrun,pnpm create cloudflare $(api) --type=openapi --no-deploy)
-
-$(vb)/pnpm: $(vb)/npm
-	$(call vrun,npm install --global pnpm)
 
 $(vb)/npm: $(vb)/nodeenv
 	$(call vrun,nodeenv --python-virtualenv --node=lts && \
@@ -79,4 +80,3 @@ clean:
 		exit 1; \
 	fi >&2
 	rm --force --recursive $(venv)* .pip .npm node_modules
-
