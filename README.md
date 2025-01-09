@@ -1,7 +1,7 @@
 # Web Applications for the Central Sierra Economic Development District
 
 This is a mono-repo for various ideas, proototypes, & web applications
-used by the CSEDD team. Some may swim. Others may sink.
+used by the CSEDD team. Some ideas may swim. Others may sink.
 
 ## Develoment
 
